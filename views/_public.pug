@@ -1,16 +1,5 @@
 include _icons.pug
-
-mixin nav-link()
-  a(aria-current=currentPath === attributes.href && "page")&attributes(attributes)
-    block
-
-mixin nav-list(label)
-  nav(aria-label=label)
-    ul(role="list"): block
-
-mixin nav-item()
-  li: +nav-link()&attributes(attributes)
-    block
+include _nav.pug
 
 doctype html
 html(lang="en-ca")
@@ -21,7 +10,7 @@ html(lang="en-ca")
     link(rel="stylesheet" href="/main.css")
     block head
   body
-    a.skip-link.visually-hidden(href="#content") Skip to content
+    +skip-link
     header
       +nav-link.site-title(href="/") Nathan Knowler
       +nav-list("primary")

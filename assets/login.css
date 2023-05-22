@@ -1,0 +1,14 @@
+:root {
+	--color-canvas-default: hsl(210 13% 7%);
+	--color-canvas-muted: hsl(210 13% 10%);
+	--color-fg-default: hsl(210 27% 60%);
+	--color-accent-default: hsl(160 54% 70%);
+	--color-accent-emphasis: hsl(160 95% 80%);
+}
+
+html {
+	background-color: var(--color-canvas-default);
+	color: var(--color-fg-default);
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}

@@ -38,16 +38,15 @@ block content
     if posts.length > 0
       ol(reversed role="list")
         each post in posts
-          li
-            article
-              mixin blog-post-title
-                h2: a(href=`/blog/${post.slug}`)= post.title
-              if post.subtitle
-                hgroup: +blog-post-title
-              else
-                +blog-post-title
-              if post.description
-                p post.description
-              time(datetime=post.publishedAt) #{new Date(post.publishedAt).toDateString()}
+          li: article
+            mixin blog-post-title
+              h2: a(href=`/blog/${post.slug}`)= post.title
+            if post.subtitle
+              hgroup: +blog-post-title
+            else
+              +blog-post-title
+            if post.description
+              p post.description
+            time(datetime=post.publishedAt) #{new Date(post.publishedAt).toDateString()}
     else
       p There are not posts.

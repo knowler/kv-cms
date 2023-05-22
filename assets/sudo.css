@@ -1,0 +1,59 @@
+:root {
+	--color-canvas-default: hsl(210 13% 7%);
+	--color-canvas-muted: hsl(210 13% 10%);
+	--color-fg-default: hsl(210 27% 60%);
+	--color-accent-default: hsl(160 54% 70%);
+	--color-accent-emphasis: hsl(160 95% 80%);
+}
+
+html {
+	background-color: var(--color-canvas-default);
+	color: var(--color-fg-default);
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  display: grid;
+  gap: 1rem;
+  grid-template: "sidebar content" / max-content auto;
+  margin: 0;
+}
+
+header {
+  display: grid;
+  grid-column: sidebar;
+  padding: 1rem;
+    gap: 0.5rem;
+
+  & nav {
+    display: contents;
+
+    & ul {
+      display: contents;
+      list-style: none;
+      padding-inline-start: 0;
+      margin-block: 0;
+    }
+  }
+}
+
+main {
+  grid-column: content;
+}
+
+.visually-hidden:not(:focus, :active) {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+.skip-link:focus {
+  position: fixed;
+}

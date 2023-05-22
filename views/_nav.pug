@@ -1,0 +1,14 @@
+mixin skip-link(label="Skip to content")
+  a.skip-link.visually-hidden(href="#content")&attributes(attributes)= label
+
+mixin nav-list(label)
+  nav(aria-label=label)
+    ul(role="list"): block
+
+mixin nav-item()
+  li: +nav-link()&attributes(attributes)
+    block
+
+mixin nav-link()
+  a(aria-current=currentPath === attributes.href && "page")&attributes(attributes)
+    block
