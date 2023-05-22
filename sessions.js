@@ -108,7 +108,7 @@ export const {getSession, commitSession} = createDenoKVSessionStorage({
     maxAge: 60 * 60 * 24 * 7,
     path: '/',
     sameSite: 'lax',
-    domain: 'localhost',
+    domain: Deno.env.get("SESSION_DOMAIN"),
   },
   kv: await Deno.openKv(),
 });
