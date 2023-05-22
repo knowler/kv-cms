@@ -26,12 +26,12 @@ html(lang="en-ca")
       +nav-link.site-title(href="/") Nathan Knowler
       +nav-list("primary")
         +nav-item(href="/") Home
+        +nav-item(href="/about") About
         +nav-item(href="/blog") Blog
-        +nav-item(href="/garden") Garden
-        +nav-item(href="https://github.com/knowler")
+        +nav-item.icon-link(href="https://github.com/knowler" rel="me" title="@knowler on GitHub")
           span.visually-hidden @knowler on GitHub
           +github-icon(aria-hidden="true" width="1.25em" height="1.25em")
-        +nav-item(href="https://sunny.garden/@knowler")
+        +nav-item.icon-link(href="https://sunny.garden/@knowler" rel="me" title="@knowler@sunny.garden on Mastodon")
           span.visually-hidden @knowler@sunny.garden on Mastodon
           +mastodon-icon(aria-hidden="true" width="1.25em" height="1.25em")
     main#content

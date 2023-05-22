@@ -9,7 +9,7 @@ const routes = [
   {
     pattern: new URLPattern({pathname: "/"}),
     GET: () => view(
-      "home.pug",
+      "home",
       {
         title: 'Home',
         currentPath: "/",
@@ -21,7 +21,7 @@ const routes = [
     pattern: new URLPattern({pathname: "/blog{/}?"}),
     GET() {
       return view(
-        "blog.pug",
+        "blog",
         {
           title: "Blog",
           currentPath: "/blog",
@@ -42,10 +42,22 @@ const routes = [
     }
   },
   {
+    pattern: new URLPattern({pathname: "/about{/}?"}),
+    GET() {
+      return view(
+        "page",
+        {
+          title: "About",
+          content: "<h1>About</h1>",
+        },
+      );
+    }
+  },
+  {
     pattern: new URLPattern({pathname: "/accessibility{/}?"}),
     GET() {
       return view(
-        "page.pug",
+        "page",
         {
           title: "Accessibility Statement",
           currentPath: "/accessibility",
@@ -58,7 +70,7 @@ const routes = [
     pattern: new URLPattern({pathname: "/privacy{/}?"}),
     GET() {
       return view(
-        "page.pug",
+        "page",
         {
           title: "Privacy Policy",
           currentPath: "/privacy",
@@ -70,7 +82,7 @@ const routes = [
   {
     pattern: new URLPattern({pathname: "/webmention{/}?"}),
     GET: () => view(
-      "webmention.pug",
+      "webmention",
       {
         title: 'Webmention',
         currentPath: "/webmention",
@@ -191,7 +203,7 @@ function view(template, context = {}, init = {}) {
   init.headers.set('content-type', 'text/html; charset=utf-8');
 
   return new Response(
-    renderFile(`./views/${template}`, {
+    renderFile(`./views/${template}.pug`, {
       basedir: './views',
       ...context,
     }),
