@@ -1,0 +1,11 @@
+extends _sudo.pug
+
+block content
+  h1 Webmention
+  form(method="post" action=`/sudo/webmentions/${webmention.id}/delete`)
+    button Delete
+  dl
+    dt Source
+    dd= webmention.source
+    dt Target
+    dd= webmention.target

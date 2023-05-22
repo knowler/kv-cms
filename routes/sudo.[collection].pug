@@ -1,0 +1,7 @@
+extends _sudo.pug
+
+block content
+  h1= title
+  ul
+    each collectionItem in collectionItems
+      li: a(href=`/sudo/${collection}/${collectionItem.id}`)= collectionItem.title

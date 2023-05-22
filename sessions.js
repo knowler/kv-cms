@@ -1,4 +1,5 @@
 import { getCookies } from "https://deno.land/std@0.188.0/http/mod.ts";
+import kv from "./kv.js";
 
 function flash(name) {
   return `__flash_${name}__`;
@@ -110,5 +111,5 @@ export const {getSession, commitSession} = createDenoKVSessionStorage({
     sameSite: 'lax',
     domain: Deno.env.get("SESSION_DOMAIN"),
   },
-  kv: await Deno.openKv(),
+  kv,
 });

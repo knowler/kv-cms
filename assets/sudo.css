@@ -17,6 +17,7 @@ body {
   display: grid;
   gap: 1rem;
   grid-template: "sidebar content" / max-content auto;
+  align-items: start;
   margin: 0;
 }
 

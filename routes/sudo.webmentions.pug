@@ -1,0 +1,13 @@
+extends _sudo.pug
+
+block content
+  h1 Webmentions
+  ul
+    each webmention in webmentions
+      li
+        dl
+          dt Source
+          dd= webmention.source
+          dt Target
+          dd= webmention.target
+        a(href=`/sudo/webmentions/${webmention.id}`) View
