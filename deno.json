@@ -1,5 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run --allow-net main.js"
-  }
+    "dev": "deno run --unstable --allow-read=. --allow-net --allow-env --watch website.js"
+  },
+  "importMap": "./import_map.json",
 }

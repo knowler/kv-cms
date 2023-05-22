@@ -1,0 +1,53 @@
+extends _public.pug
+
+append head
+  style.
+    .blog ol {
+      list-style: none;
+      padding-inline-start: 0;
+      display: grid;
+      gap: 1.5rem;
+      max-inline-size: 64rem;
+    }
+    .blog li {
+      grid-column: span 6;
+    }
+    .blog hgroup {
+      display: grid;
+      gap: 0.25rem;
+    }
+    .blog h2 {
+      font-size: 1.25em;
+      font-weight: 300;
+      font-variation-settings: 'wdth' 110;
+      letter-spacing: 0.01em;
+      margin-block: 0;
+    }
+    .blog p {
+      margin-block-start: 0.25em;
+      margin-block-end: 0;
+      max-inline-size: 48ch;
+    }
+    .blog time {
+      font-style: italic;
+    }
+
+block content
+  article.blog
+    h1 Blog
+    if posts.length > 0
+      ol(reversed role="list")
+        each post in posts
+          li
+            article
+              mixin blog-post-title
+                h2: a(href=`/blog/${post.slug}`)= post.title
+              if post.subtitle
+                hgroup: +blog-post-title
+              else
+                +blog-post-title
+              if post.description
+                p post.description
+              time(datetime=post.publishedAt) #{new Date(post.publishedAt).toDateString()}
+    else
+      p There are not posts.
