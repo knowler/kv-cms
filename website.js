@@ -2,49 +2,64 @@ import { renderFile } from "pug";
 import { serve } from "std/http";
 import { contentType } from "std/media_types";
 
+import * as indexRoute from "~/routes/index.js";
+import * as blogIndexRoute from "~/routes/blog.index.js";
+import * as webmentionRoute from "~/routes/webmention.js";
+import * as pageRoute from "~/routes/[page].js";
+
+import * as sudoIndexRoute from "~/routes/sudo.index.js";
+import * as sudoExitRoute from "~/routes/sudo.exit.js";
+import * as sudoDashboardRoute from "~/routes/sudo.dashboard.js";
+import * as sudoWebmentionsRoute from "~/routes/sudo.webmentions.js";
+import * as sudoWebmentionSingleRoute from "~/routes/sudo.webmentions.[webmentionId].js";
+import * as sudoWebmentionSingleDeleteRoute from "~/routes/sudo.webmentions.[webmentionId].delete.js";
+import * as sudoCollectionRoute from "~/routes/sudo.[collection].js";
+import * as sudoCollectionItemRoute from "~/routes/sudo.[collection].[itemId].js";
+
 const routes = [
   {
     pattern: new URLPattern({pathname: "/"}),
-    module: () => import("~/routes/index.js"),
+    ...indexRoute,
   },
   {
     pattern: new URLPattern({pathname: "/blog{/}?"}),
-    module: () => import("~/routes/blog.index.js"),
+    ...blogIndexRoute,
   },
   {
     pattern: new URLPattern({pathname: "/webmention{/}?"}),
-    module: () => import("~/routes/webmention.js"), },
+    ...webmentionRoute,
+  },
   {
     pattern: new URLPattern({pathname: "/sudo{/}?"}),
-    module: () => import("~/routes/sudo.index.js"),
+    ...sudoIndexRoute,
   },
   {
     pattern: new URLPattern({pathname: "/sudo/exit{/}?"}),
-    module: () => import("~/routes/sudo.exit.js"),
+    ...sudoExitRoute,
   },
   {
     pattern: new URLPattern({pathname: "/sudo/dashboard{/}?"}),
-    module: () => import("~/routes/sudo.dashboard.js"),
+    ...sudoDashboardRoute,
   },
   {
     pattern: new URLPattern({pathname: "/sudo/webmentions{/}?"}),
-    module: () => import("~/routes/sudo.webmentions.js"),
+    ...sudoWebmentionsRoute,
   },
   {
     pattern: new URLPattern({pathname: "/sudo/webmentions/:webmentionId{/}?"}),
-    module: () => import("~/routes/sudo.webmentions.[webmentionId].js")
+    ...sudoWebmentionSingleRoute,
   },
   {
     pattern: new URLPattern({pathname: "/sudo/webmentions/:webmentionId/delete{/}?"}),
-    module: () => import("~/routes/sudo.webmentions.[webmentionId].delete.js"),
+    ...sudoWebmentionSingleDeleteRoute,
   },
   {
     pattern: new URLPattern({pathname: "/sudo/:collection{/}?"}),
-    module: () => import("~/routes/sudo.[collection].js"),
+    ...sudoCollectionRoute,
   },
   {
     pattern: new URLPattern({pathname: "/sudo/:collection/:itemId{/}?"}),
-    module: () => import("~/routes/sudo.[collection].[itemId].js"),
+    ...sudoCollectionItemRoute,
   },
   {
     pattern: new URLPattern({pathname: "/:filename.:extension"}),
@@ -68,7 +83,7 @@ const routes = [
   },
   {
     pattern: new URLPattern({pathname: "/:page{/}?"}),
-    module: () => import("~/routes/[page].js"),
+    ...pageRoute,
   },
 ];
 
