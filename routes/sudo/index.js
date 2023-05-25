@@ -22,7 +22,7 @@ export async function GET({request, view}) {
     await commitSession(session),
   );
 
-  return view("sudo.index", {
+  return view("sudo/index", {
     title: "Sign In",
     errors,
   }, { headers });

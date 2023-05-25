@@ -1,9 +1,6 @@
-import { authOrLogin } from "~/auth.js";
 import kv from "~/kv.js";
 
-export async function GET({request, view}) {
-  await authOrLogin(request);
-
+export async function GET({view}) {
   const iter = await kv.list({ prefix: ["webmention"] }, { limit: 10 });
   const webmentions = [];
   for await (const res of iter) {
@@ -13,9 +10,8 @@ export async function GET({request, view}) {
     });
   }
 
-  return view("sudo.webmentions", {
+  return view("sudo/webmentions", {
     title: "Webmentions",
-    currentPath: "/sudo/webmentions",
     webmentions,
   });
 }

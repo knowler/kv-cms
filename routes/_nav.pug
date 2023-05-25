@@ -10,5 +10,5 @@ mixin nav-item()
     block
 
 mixin nav-link()
-  a(aria-current=currentPath === attributes.href && "page")&attributes(attributes)
+  a(aria-current=isCurrentPath(attributes.href) && "page")&attributes(attributes)
     block

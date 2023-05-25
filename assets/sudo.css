@@ -25,7 +25,11 @@ header {
   display: grid;
   grid-column: sidebar;
   padding: 1rem;
-    gap: 0.5rem;
+  gap: 0.5rem;
+
+  & a[aria-current="page"] {
+    text-decoration: none;
+  }
 
   & nav {
     display: contents;
@@ -57,4 +61,20 @@ main {
 
 .skip-link:focus {
   position: fixed;
+}
+
+form {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  justify-items: start;
+  gap: 0.5rem;
+
+  & label {
+    font-weight: 500;
+  }
 }

@@ -3,7 +3,6 @@ export function GET({view}) {
     "blog.index",
     {
       title: "Blog",
-      currentPath: "/blog",
       posts: [
         {
           title: 'Rust for a Rusty Game Developer',

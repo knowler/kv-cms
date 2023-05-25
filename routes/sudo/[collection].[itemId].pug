@@ -1,0 +1,16 @@
+extends _sudo.pug
+
+block content
+  h1= title
+  form(method="post" action=`${currentPath}/delete`)
+    button Delete
+  form(method="post" action=`${currentPath}/publish`)
+    button Publish
+  form(method="post")
+    .form-field
+      label(for="title") Title
+      input#title(name="title" value=collectionItem.title placeholder="Title")
+    .form-field
+      label(for="html") Content
+      textarea#html(name="html")= collectionItem.html
+    button Update

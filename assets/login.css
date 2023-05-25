@@ -11,4 +11,51 @@ html {
 	color: var(--color-fg-default);
   color-scheme: dark;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+}
+
+form {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  justify-items: start;
+  gap: 0.5em;
+  font-size: 1.25rem;
+
+  & label {
+    font-weight: 500;
+  }
+
+  & input[type="password"] {
+    background-color: var(--color-canvas-muted);
+    border: 0.125em solid var(--color-fg-default);
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font: inherit;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+  }
+}
+
+button {
+  background-color: var(--color-fg-default);
+  color: var(--color-canvas-default);
+  font: inherit;
+  font-weight: 500;
+  font-size: 1.25em;
+  letter-spacing: 0.02em;
+  border: 0;
+  border-radius: 0.5em;
+  padding-block: 0.5em;
+  padding-inline: 0.75em;
+
+}
+
+:is(button, input):focus-visible {
+  outline-offset: 0.25em;
+  outline: 0.125em dashed var(--color-accent-default);
 }

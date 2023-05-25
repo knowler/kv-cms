@@ -1,17 +1,45 @@
 import kv from "~/kv.js";
 
-export async function insertPage(page) {
-  const primaryKey = ["pages", page.id];
-  const bySlugKey = ["pages_by_slug", page.slug];
+const pagesPrefix = "pages";
+const publishedPagesPrefix = "published_pages";
 
-  const res = await kv.atomic()
-    .check({ key: primaryKey, versionstamp: null })
-    .check({ key: bySlugKey, versionstamp: null })
-    .set(primaryKey, page)
-    .set(bySlugKey, page)
+export async function publishPage(id) {}
+
+export async function unpublishPage(id) {
+  // Update primary record
+  // Remove published record
+}
+
+export async function createPage(pageData) {
+  const page = {
+    ...pageData,
+    id: crypto.randomUUID(),
+  };
+  const key = [pagesPrefix, page.id];
+
+  let res = { ok: false };
+  res = await kv.atomic()
+    // This checks that the key doesn’t already exist
+    .check({ key, timestamp: null })
+    .set(key, page)
     .commit();
 
-  if (!res.ok) throw "Page with slug doesn’t exist."
+  if (!res.ok) throw "Page with ID already exists";
+
+  return page.id;
+}
+
+export async function updatePage(page) {
+  const key = [pagesPrefix, page.id];
+
+  const getRes = await kv.get(key);
+
+  const res = await kv.atomic()
+    .check(getRes)
+    .mutate({ key, type: "set", value: page })
+    .commit();
+
+  if (!res.ok) throw new Error("Cannot update page.");
 }
 
 export async function getPage(id) {
@@ -19,6 +47,7 @@ export async function getPage(id) {
   return res.value;
 }
 
+// TODO: update this
 export async function getPageBySlug(slug) {
   const res = await kv.get(["pages_by_slug", slug]);
   return res.value;
@@ -32,7 +61,7 @@ export async function deletePage(id) {
     res = await kv.atomic()
       .check(getRes)
       .delete(["pages", id])
-      .delete(["pages_by_slug", res.value.slug])
+      //.delete(["pages_by_slug", res.value.slug])
       .commit();
   }
 }

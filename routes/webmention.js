@@ -5,7 +5,6 @@ export function GET({ view }) {
     "webmention",
     {
       title: 'Webmention',
-      currentPath: "/webmention",
     },
   );
 }

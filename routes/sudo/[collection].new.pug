@@ -1,0 +1,12 @@
+extends _sudo.pug
+
+block content
+  h1= title
+  form(method="post")
+    .form-field
+      label(for="title") Title
+      input#title(name="title" placeholder="Untitled")
+    .form-field
+      label(for="slug") Slug
+      input#slug(name="slug")
+    button Create
