@@ -1,5 +1,5 @@
 import kv from "~/kv.js";
-import { getPage, updatePage } from "~/models/page.js";
+import { Page } from "~/models/page.js";
 
 const singularForCollection = {
   pages: 'page',
@@ -22,19 +22,17 @@ export async function GET({params, view}) {
 }
 
 export async function POST({request, params}) {
-  const page = await getPage(params.itemId);
   const formData = await request.formData();
 
-  await updatePage({
-    ...page,
-    title: formData.get('title'),
-    html: formData.get('html'),
-  });
+  const page = await Page.get(params.itemId);
+
+  page.html = formData.get('html');
+  page.save();
 
   return new Response(null, {
     status: 303,
     headers: {
       location: `/sudo/${params.collection}/${params.itemId}`,
     },
-  })
+  });
 }

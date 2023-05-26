@@ -6,3 +6,5 @@ block content
   ul
     each collectionItem in collectionItems
       li: a(href=`/sudo/${collection}/${collectionItem.id}`)= collectionItem.title
+        unless collectionItem.title
+          em Untitled

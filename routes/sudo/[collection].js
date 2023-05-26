@@ -1,11 +1,9 @@
-import kv from "~/kv.js";
+import { Page } from "~/models/page.js";
 
 export async function GET({params, view}) {
   const {collection} = params;
 
-  const iter = await kv.list({ prefix: [collection] }, { limit: 10 });
-  const collectionItems = [];
-  for await (const res of iter) collectionItems.push(res.value);
+  const collectionItems = await Page.list({limit: 10});
 
   return view("sudo/[collection]", {
     title: collection,

@@ -1,4 +1,4 @@
-import { createPage } from "~/models/page.js";
+import { Page } from "~/models/page.js";
 
 const singularOfCollection = {
   posts: 'post',
@@ -7,22 +7,22 @@ const singularOfCollection = {
 
 export async function GET({params, view}) {
   return view("sudo/[collection].new", {
-    title: `New ${singularOfCollection[params.collection]}`
+    title: `Create new ${singularOfCollection[params.collection]}`
   });
 }
 
 export async function POST({request, params}) {
   const formData = await request.formData();
 
-  const pageId = await createPage({
-    slug: formData.get("slug"),
-    title: formData.get("title"),
-  });
+  const page = Page.create();
+  page.title = formData.get("title");
+
+  await page.save();
 
   return new Response(null, {
     status: 303,
     headers: {
-      location: `/sudo/${params.collection}/${pageId}`,
+      location: `/sudo/${params.collection}/${page.id}`,
     },
   });
 }

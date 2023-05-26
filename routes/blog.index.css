@@ -1,0 +1,37 @@
+.blog {
+  & ol {
+    list-style: none;
+    padding-inline-start: 0;
+    display: grid;
+    gap: 1.5rem;
+    max-inline-size: 64rem;
+  }
+
+  & li {
+    grid-column: span 6;
+  }
+
+  & hgroup {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  & h2 {
+    font-size: 1.25em;
+    font-weight: 300;
+    font-variation-settings: 'wdth' 110;
+    letter-spacing: 0.01em;
+    margin-block: 0;
+  }
+
+  & p {
+    margin-block-start: 0.25em;
+    margin-block-end: 0;
+    max-inline-size: 48ch;
+  }
+
+  & time {
+    font-style: italic;
+  }
+}
+

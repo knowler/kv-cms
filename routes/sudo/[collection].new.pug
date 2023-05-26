@@ -1,12 +1,14 @@
 extends _sudo.pug
 
+append head
+  style: include [collection].new.css
+
 block content
   h1= title
   form(method="post")
     .form-field
       label(for="title") Title
-      input#title(name="title" placeholder="Untitled")
-    .form-field
-      label(for="slug") Slug
-      input#slug(name="slug")
-    button Create
+      .hint#title-hint.
+        Set a working title for the page or continue without one.
+      input#title(name="title" aria-describedby="title-hint")
+    button= title

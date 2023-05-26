@@ -1,16 +1,23 @@
 extends _sudo.pug
 
+append head
+  style: include [collection].[itemId].css
+
 block content
-  h1= title
-  form(method="post" action=`${currentPath}/delete`)
-    button Delete
-  form(method="post" action=`${currentPath}/publish`)
-    button Publish
-  form(method="post")
-    .form-field
-      label(for="title") Title
-      input#title(name="title" value=collectionItem.title placeholder="Title")
-    .form-field
-      label(for="html") Content
-      textarea#html(name="html")= collectionItem.html
-    button Update
+  a(href="/sudo/pages") Back to pages
+  article
+    h1= title
+    .actions
+      form(name="delete" method="post" action=`${currentPath}/delete`)
+        button Delete
+      if collectionItem.published
+        form(name="draft" method="post" action=`${currentPath}/unpublish`)
+          button Make Draft
+        a(href=`/${collectionItem.slug}`) View Published Page
+      else
+        a(href=`${currentPath}/publish`) Publish
+    form(name="update" method="post")
+      .form-field
+        label(for="html") Content
+        textarea#html(name="html") !{collectionItem.html}
+      button Update

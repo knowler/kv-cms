@@ -1,0 +1,44 @@
+.form-field label {
+  font-weight: 750;
+  font-variation-settings: 'wdth' 110;
+  font-size: 1.25em;
+  letter-spacing: 0.03em;
+}
+
+input:not([type]) {
+  background-color: var(--color-canvas-muted);
+  border: 0.125em solid var(--color-fg-default);
+  border-radius: 0.5em;
+  color: var(--color-fg-default);
+  font: inherit;
+  font-size: 1.25em;
+  padding-block: 0.5em;
+  padding-inline: 0.75em;
+}
+
+button {
+  background-color: var(--color-accent-default);
+  border: 0;
+  border-radius: 0.5em;
+  color: var(--color-canvas-default);
+  font: inherit;
+  font-size: 1.25em;
+  font-weight: 800;
+  font-variation-settings: "wdth" 110;
+  letter-spacing: 0.03em;
+  word-spacing: 0.2ch;
+  padding-block: 0.5em;
+  padding-inline: 0.75em;
+  transition: background-color 0.2s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-accent-emphasis);
+    }
+  }
+}
+
+:is(input, button):focus-visible {
+  outline-offset: 0.25em;
+  outline: 0.125em dashed var(--color-accent-default);
+}

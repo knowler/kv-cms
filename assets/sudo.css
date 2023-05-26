@@ -13,6 +13,8 @@ html {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+*, ::before, ::after { box-sizing: border-box; }
+
 body {
   display: grid;
   gap: 1rem;
@@ -61,6 +63,12 @@ main {
 
 .skip-link:focus {
   position: fixed;
+  outline: 0.125em dashed var(--color-accent-default);
+  padding: 0.5em;
+  background-color: var(--color-canvas-default);
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+  border-radius: 0.5em;
 }
 
 form {
@@ -77,4 +85,30 @@ form {
   & label {
     font-weight: 500;
   }
+}
+
+button {
+  background-color: var(--color-accent-default);
+  border: 0;
+  border-radius: 0.5em;
+  color: var(--color-canvas-default);
+  font: inherit;
+  font-weight: 800;
+  font-variation-settings: "wdth" 110;
+  letter-spacing: 0.03em;
+  word-spacing: 0.2ch;
+  padding-block: 0.5em;
+  padding-inline: 0.75em;
+  transition: background-color 0.2s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-accent-emphasis);
+    }
+  }
+}
+
+:focus-visible {
+  outline: 0.125em dashed var(--color-accent-default);
+  outline-offset: 0.25em;
 }

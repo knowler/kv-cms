@@ -1,6 +1,7 @@
 import { renderFile } from "pug";
 import { serve } from "std/http";
 import { contentType } from "std/media_types";
+import { getSession } from "~/sessions.js";
 
 import * as indexRoute from "~/routes/index.js";
 import * as blogIndexRoute from "~/routes/blog.index.js";
@@ -17,7 +18,22 @@ import * as sudoCollectionRoute from "~/routes/sudo/[collection].js";
 import * as sudoCollectionNewItemRoute from "~/routes/sudo/[collection].new.js";
 import * as sudoCollectionItemRoute from "~/routes/sudo/[collection].[itemId].js";
 import * as sudoCollectionItemDeleteRoute from "~/routes/sudo/[collection].[itemId].delete.js";
-import { authOrLogin } from "~/auth.js";
+import * as sudoCollectionItemPublishRoute from "~/routes/sudo/[collection].[itemId].publish.js";
+
+const kv = await Deno.openKv();
+
+const pagesIter = await kv.list({ prefix: ["pages"] });
+
+const log = value => console.log(value);
+const del = res => kv.delete(res.key);
+
+for await (const res of pagesIter) log(res);
+
+const publishedPagesIter = await kv.list({ prefix: ["published_pages"] });
+
+for await (const res of publishedPagesIter) log(res);
+
+//Deno.exit();
 
 const publicRoutes = [
   {
@@ -79,6 +95,10 @@ const sudoRoutes = [
     pattern: new URLPattern({pathname: "/sudo/:collection/:itemId/delete{/}?"}),
     ...sudoCollectionItemDeleteRoute,
   },
+  {
+    pattern: new URLPattern({pathname: "/sudo/:collection/:itemId/publish{/}?"}),
+    ...sudoCollectionItemPublishRoute,
+  }
 ];
 
 serve(handle);
@@ -87,7 +107,16 @@ const sudoRoutePattern = new URLPattern({ pathname: "/sudo/:etc+" });
 const assetPattern = new URLPattern({ pathname: "/:filename.:extension" });
 
 async function handleSudoRoute(request) {
-  await authOrLogin(request)
+  const session = await getSession(request);
+
+  if (!session.get("authenticated")) {
+    return new Response(null, {
+      status: 303,
+      headers: {
+        location: "/sudo",
+      },
+    });
+  }
 
   return matchRequestToRoutes(request, sudoRoutes);
 }
@@ -184,4 +213,3 @@ function createView(request) {
     );
   }
 }
-

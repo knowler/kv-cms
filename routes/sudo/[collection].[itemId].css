@@ -1,0 +1,28 @@
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+form[name="update"] {
+  margin-block-start: 1rem;
+}
+
+textarea {
+  background-color: var(--color-canvas-muted);
+  font-size: 1rem;
+  font-family: Dank Mono, monospace;
+  padding-block: 0.0625em;
+  padding-inline: 0.75em;
+  border: 0.125em solid var(--color-fg-default);
+  border-radius: 0.25em;
+  line-height: 2;
+  inline-size: 64ch;
+  max-inline-size: 64ch;
+  min-inline-size: 32ch;
+  block-size: 12rem;
+
+  &:focus-visible {
+    outline: 0.125em dashed var(--color-accent-default);
+    outline-offset: 0.25em;
+  }
+}
