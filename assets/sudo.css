@@ -15,6 +15,10 @@ html {
 
 *, ::before, ::after { box-sizing: border-box; }
 
+html, body {
+  block-size: 100%;
+}
+
 body {
   display: grid;
   gap: 1rem;
@@ -24,7 +28,12 @@ body {
 }
 
 header {
+  background-color: var(--color-canvas-muted);
+  block-size: 100%;
+  inline-size: 20ch;
   display: grid;
+  place-items: start;
+  grid-template-rows: max-content auto max-content;
   grid-column: sidebar;
   padding: 1rem;
   gap: 0.5rem;
@@ -34,13 +43,35 @@ header {
   }
 
   & nav {
-    display: contents;
-
     & ul {
-      display: contents;
+      display: grid;
+      gap: 0.5rem;
       list-style: none;
       padding-inline-start: 0;
       margin-block: 0;
+    }
+  }
+
+  .exit {
+    background-color: var(--color-canvas-default);
+    border: 0.125em solid var(--color-fg-default);
+    border-radius: 9999px;
+    padding-block: 0.375em;
+    padding-inline: 0.75em;
+    color: var(--color-fg-default);
+    text-decoration: none;
+    font-weight: 600;
+    font-variation-settings: "wdth" 110;
+    letter-spacing: 0.02em;
+    transition-property: background-color, color;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-fg-default);
+        color: var(--color-canvas-default);
+      }
     }
   }
 }
@@ -87,12 +118,10 @@ form {
   }
 }
 
-button {
+:is(button, .button) {
   background-color: var(--color-accent-default);
-  border: 0;
   border-radius: 0.5em;
   color: var(--color-canvas-default);
-  font: inherit;
   font-weight: 800;
   font-variation-settings: "wdth" 110;
   letter-spacing: 0.03em;
@@ -100,6 +129,16 @@ button {
   padding-block: 0.5em;
   padding-inline: 0.75em;
   transition: background-color 0.2s ease-in-out;
+
+  &:is(button) {
+    border: 0;
+    font-size: 1em;
+    font-family: inherit;
+  }
+
+  &:is(a) {
+    text-decoration: none;
+  }
 
   @media (hover: hover) {
     &:hover {

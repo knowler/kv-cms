@@ -1,4 +1,14 @@
+main {
+  display: grid;
+  grid-template:
+    "breadcrumbs sidebar"
+    "content sidebar";
+  place-items: start;
+  padding-block: 1rem;
+}
+
 .actions {
+  grid-area: sidebar;
   display: flex;
   gap: 0.5rem;
 }
@@ -14,7 +24,7 @@ textarea {
   padding-block: 0.0625em;
   padding-inline: 0.75em;
   border: 0.125em solid var(--color-fg-default);
-  border-radius: 0.25em;
+  border-radius: 0.5em;
   line-height: 2;
   inline-size: 64ch;
   max-inline-size: 64ch;
@@ -25,4 +35,10 @@ textarea {
     outline: 0.125em dashed var(--color-accent-default);
     outline-offset: 0.25em;
   }
+}
+
+hgroup {
+  display: flex;
+  gap: 5em;
+  align-items: baseline;
 }

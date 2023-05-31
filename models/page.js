@@ -154,18 +154,18 @@ export class Page {
     const needsToBeUnpublished = wasPublished && !this.published;
 
     if (needsToBeUnpublished) {
-      console.log("was published and now isn’t");
       this.publishedAt = undefined;
       res.delete(this.#publishedPageKey)
     } 
+
+    const needsToBePublished = !wasPublished && this.published;
+    if (needsToBePublished) this.publishedAt = this.modifiedAt;
 
     const pageData = Object.fromEntries(this.#data);
 
     res.set(this.#pageKey, pageData);
 
-    const needsToBePublished = !wasPublished && this.published;
     if (!needsToBeUnpublished && (needsToBePublished || wasPublished)) {
-      console.log("is published or needs to be");
       res.set(this.#publishedPageKey, pageData);
     }
 

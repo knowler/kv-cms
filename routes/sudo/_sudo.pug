@@ -6,17 +6,17 @@ html(lang="en-ca")
     block head
       meta(charset="utf-8")
       meta(name="viewport" content="width=device-width, initial-scale=1")
-      title #{title} – Sudo Nathan Knowler
+      title #{title} – Sudo
       link(rel="stylesheet" href="/sudo.css")
   body
     block body
       +skip-link
       header
         +nav-link(href="/sudo/dashboard") Sudo
-        +nav-link(href="/sudo/exit") Exit
         +nav-list("primary")
           +nav-item(href="/sudo/pages") Pages
           +nav-item(href="/sudo/posts") Posts
           +nav-item(href="/sudo/webmentions") Webmentions
+        +nav-link.exit(href="/sudo/exit") Exit
       main#content(tabindex="-1")
         block content

@@ -7,17 +7,29 @@ block content
   a(href="/sudo/pages") Back to pages
   article
     h1= title
-    .actions
-      form(name="delete" method="post" action=`${currentPath}/delete`)
-        button Delete
+
+    dl
+      dt Created (#[a(href=`${currentPath}/edit/createdAt`) Edit])
+      dd #{new Date(collectionItem.createdAt).toDateString()} at #{new Date(collectionItem.createdAt).toTimeString()}
+      if collectionItem.modifiedAt
+        dt Modified (#[a(href=`${currentPath}/edit/modifiedAt`) Edit])
+        dd #{new Date(collectionItem.modifiedAt).toDateString()} at #{new Date(collectionItem.modifiedAt).toTimeString()}
       if collectionItem.published
-        form(name="draft" method="post" action=`${currentPath}/unpublish`)
-          button Make Draft
-        a(href=`/${collectionItem.slug}`) View Published Page
-      else
-        a(href=`${currentPath}/publish`) Publish
-    form(name="update" method="post")
-      .form-field
-        label(for="html") Content
-        textarea#html(name="html") !{collectionItem.html}
-      button Update
+        dt Published (#[a(href=`${currentPath}/edit/publishedAt`) Edit])
+        dd #{new Date(collectionItem.publishedAt).toDateString()} at #{new Date(collectionItem.publishedAt).toTimeString()}
+      dt Title (#[a(href=`${currentPath}/edit/title`) Edit])
+      dd= collectionItem.title
+      dt Slug (#[a(href=`${currentPath}/edit/slug`) Edit])
+      dd= collectionItem.slug
+      dt Content (#[a(href=`${currentPath}/edit/html`) Edit])
+      dd(style="max-width: 48ch"): pre(style="white-space: pre-wrap"): code= collectionItem.html
+
+  aside.actions
+    form(name="delete" method="post" action=`${currentPath}/delete`)
+      button Delete
+    if collectionItem.published
+      form(name="draft" method="post" action=`${currentPath}/unpublish`)
+        button Make Draft
+      a(href=`/${collectionItem.slug}`) View Published Page
+    else
+      a.button(href=`${currentPath}/publish`) Publish

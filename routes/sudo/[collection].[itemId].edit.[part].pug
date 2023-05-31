@@ -1,0 +1,11 @@
+extends _sudo.pug
+
+block content
+  nav(aria-label="Breadcrumb")
+    a(href=backLink) Back to overview
+  h1= title
+  form(method="post")
+    .form-field
+      label(for="part")
+      textarea#part(name=part)= currentValue
+    button= title
