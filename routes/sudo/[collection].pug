@@ -2,7 +2,7 @@ extends _sudo.pug
 
 block content
   h1= title
-  a(href=`/sudo/${collection}/new`) New
+  a.button(href=`/sudo/${collection}/new`) New
   ul
     each collectionItem in collectionItems
       li: a(href=`/sudo/${collection}/${collectionItem.id}`)= collectionItem.title

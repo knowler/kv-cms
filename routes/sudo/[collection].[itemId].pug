@@ -30,6 +30,6 @@ block content
     if collectionItem.published
       form(name="draft" method="post" action=`${currentPath}/unpublish`)
         button Make Draft
-      a(href=`/${collectionItem.slug}`) View Published Page
+      a.button(href=`/${collectionItem.slug}`) View Published Page
     else
       a.button(href=`${currentPath}/publish`) Publish
