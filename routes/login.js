@@ -22,7 +22,7 @@ export async function GET({request, view}) {
     await commitSession(session),
   );
 
-  return view("sudo/index", {
+  return view("login", {
     title: "Sign In",
     errors,
   }, { headers });
@@ -50,7 +50,7 @@ export async function POST({request}) {
     headers.set("location", "/sudo/dashboard");
     session.set("authenticated", true);
   } else {
-    headers.set("location", "/sudo");
+    headers.set("location", `/${Deno.env.get("LOGIN_ROUTE")}`);
     session.flash("errors", "Password is incorrect.");
   }
 

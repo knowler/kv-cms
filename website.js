@@ -8,7 +8,8 @@ import * as blogIndexRoute from "~/routes/blog.index.js";
 import * as webmentionRoute from "~/routes/webmention.js";
 import * as pageRoute from "~/routes/[page].js";
 
-import * as sudoIndexRoute from "~/routes/sudo/index.js";
+import * as loginRoute from "~/routes/login.js";
+
 import * as sudoExitRoute from "~/routes/sudo/exit.js";
 import * as sudoDashboardRoute from "~/routes/sudo/dashboard.js";
 import * as sudoWebmentionsRoute from "~/routes/sudo/webmentions.js";
@@ -36,8 +37,8 @@ const publicRoutes = [
     ...webmentionRoute,
   },
   {
-    pattern: new URLPattern({pathname: "/sudo{/}?"}),
-    ...sudoIndexRoute,
+    pattern: new URLPattern({pathname: `/${Deno.env.get('LOGIN_ROUTE')}{/}?`}),
+    ...loginRoute,
   },
   {
     pattern: new URLPattern({pathname: "/:page{/}?"}),
@@ -108,7 +109,7 @@ async function handleSudoRoute(request) {
     return new Response(null, {
       status: 303,
       headers: {
-        location: "/sudo",
+        location: `/${Deno.env.get("LOGIN_ROUTE")}`,
       },
     });
   }

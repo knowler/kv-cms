@@ -2,9 +2,20 @@ extends _sudo.pug
 
 block content
   h1= title
-  a.button(href=`/sudo/${collection}/new`) New
-  ul
+  a.button(href=`/sudo/${collection}/new`) New #[span.visually-hidden Page]
+  ul(role="list").collection
     each collectionItem in collectionItems
-      li: a(href=`/sudo/${collection}/${collectionItem.id}`)= collectionItem.title
-        unless collectionItem.title
-          em Untitled
+      li.card: article
+        h2= collectionItem.title
+          unless collectionItem.title
+            em Untitled
+        if collectionItem.description
+          p= collectionItem.description
+        .actions
+          a.button(href=`/sudo/${collection}/${collectionItem.id}`) Edit #[span.visually-hidden “#{collectionItem.title || "Untitled Page"}”]
+          if collectionItem.published
+            | 
+            a.button(href=`/${collectionItem.slug}`) View #[span.visually-hidden “#{collectionItem.title || "Untitled Page"}”]
+
+append head
+  style: include [collection].css

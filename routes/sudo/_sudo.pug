@@ -7,13 +7,14 @@ html(lang="en-ca")
       meta(charset="utf-8")
       meta(name="viewport" content="width=device-width, initial-scale=1")
       title #{title} – Sudo
+      meta(name="robots" content="none")
       link(rel="stylesheet" href="/sudo.css")
   body
     block body
       +skip-link
       header
-        +nav-link(href="/sudo/dashboard") Sudo
         +nav-list("primary")
+          +nav-link(href="/sudo/dashboard") Dashboard
           +nav-item(href="/sudo/pages") Pages
           +nav-item(href="/sudo/posts") Posts
           +nav-item(href="/sudo/webmentions") Webmentions

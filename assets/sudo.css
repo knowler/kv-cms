@@ -27,13 +27,24 @@ body {
   margin: 0;
 }
 
+a {
+  color: var(--color-accent-default);
+  transition: color 0.2s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-accent-emphasis);
+    }
+  }
+}
+
 header {
   background-color: var(--color-canvas-muted);
   block-size: 100%;
   inline-size: 20ch;
   display: grid;
   place-items: start;
-  grid-template-rows: max-content auto max-content;
+  grid-template-rows: auto max-content;
   grid-column: sidebar;
   padding: 1rem;
   gap: 0.5rem;
@@ -137,11 +148,13 @@ form {
   }
 
   &:is(a) {
+    display: inline-block;
     text-decoration: none;
   }
 
   @media (hover: hover) {
     &:hover {
+      color: var(--color-canvas-default);
       background-color: var(--color-accent-emphasis);
     }
   }
