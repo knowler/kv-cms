@@ -109,7 +109,7 @@ async function handleSudoRoute(request) {
     return new Response(null, {
       status: 303,
       headers: {
-        location: `/${Deno.env.get("LOGIN_ROUTE")}`,
+        location: "/",
       },
     });
   }
